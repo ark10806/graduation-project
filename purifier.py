@@ -17,7 +17,7 @@ def getMeme():
     clip = Encoders.MultiModalClip()
     pkl_data = pickleIO.loadFeatures(params.pkl_file)
     output = []
-    for data in tqdm(pkl_data):
+    for data in tqdm(pkl_data, desc=f'fltr {params.catname[0]}'):
         pred, prob = clip.getCategory(data['feature'], params.categories)
         if pred == 0: # Meme category
             output.append({
@@ -32,7 +32,7 @@ def getMeme():
 
 def visMeme():
     meme = pickleIO.loadFeatures('meme.pkl')
-    for data in tqdm(meme, desc='vis memes'):
+    for data in tqdm(meme, desc=f'vis {params.catname[0]}'):
         img = Image.open(os.path.join(params.data_root, 'images', data['fname'])).resize((256,256))
         meme_path = os.path.join(params.res_path, 'meme')
         if not os.path.isdir(meme_path):
@@ -41,5 +41,5 @@ def visMeme():
 
 
 if __name__ == '__main__':
-    # getMeme()
+    getMeme()
     visMeme()

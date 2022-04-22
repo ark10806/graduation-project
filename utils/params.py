@@ -6,11 +6,16 @@ def mkdir(path: str):
 root_dir = '/home/seungchan/Desktop/Projs/graduation-project'
 data_root = os.path.join(root_dir, 'dataset/2022_02_all')
 pkl_file = 'features.pkl'
+meme_feature_path = os.path.join(root_dir, 'result', 'meme.pkl')
 res_path = os.path.join(root_dir, 'result')
+scweet_path = os.path.join(root_dir, 'dataset/scweet')
+papago_monitor_path = os.path.join(root_dir, 'utils/translator/papago_monitor')
 mkdir(res_path)
+mkdir(papago_monitor_path)
 
 categories = [
-    'A funny clips, animals, comics or strip cartoons',
+    # 'A funny clips, animals, comics or strip cartoons',
+    "야구 농구 축구 배구"
     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 
     'It is about political issues or politicians in governments',
     'It is about social issues, pandemics or vaccine for COVID-19 virus or photos of family',
