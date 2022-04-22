@@ -29,12 +29,12 @@ def get_twits(year: int, month: int, logger: Logger, dst: str, keyword: str):
         csv_path = os.path.join(dst, 'outputs')
         if not os.path.isdir(csv_path):
             os.makedirs(csv_path)
-        data.to_csv(os.path.join(csv_path, f'WebCrawl_{month:02}.csv'), header=False, index=False)
-        log = f'[{"Complete":^10}] {month} ~ {month+1}'
+        data.to_csv(os.path.join(csv_path, f'WebCrawl_{year}-{month:02}.csv'), header=False, index=False)
+        log = f'[{"Complete":^10}] {year} {month} ~ {month+1}'
         logger.write_log(log)
     except Exception as e:
         print(e)
-        log = f'[{"Failed":^10}] {month} ~ {month+1}\n\t\t{e}'
+        log = f'[{"Failed":^10}] {year} {month} ~ {month+1}\n\t\t{e}'
         logger.write_log(log)
         get_twits(year, month, logger, dst, keyword)
 
@@ -47,8 +47,12 @@ if __name__ == '__main__':
     logfile = 'log.txt'
     keyword = '짤방'
     logger = Logger(dst, logfile)
-    for year in range(2021, 2022+1):
-        for month in range(1,12):
+
+    for year in range(2022, 2022+1):
+    #for year in range(2021, 2022+1):
+
+        #for month in range(1,12):
+        for month in range(3,6):
             if year == 2021 and month < 4:
                 continue
             if year == 2022 and month == 5:

@@ -2,6 +2,7 @@ import dash
 from flask import Flask, request
 from flask_cors import CORS
 
+import Recommander
 from models import Encoders
 from utils import pickleIO, params
 
@@ -14,22 +15,9 @@ clip = Encoders.MultiModalClip()
 meme_features = pickleIO.loadFeatures(params.meme_feature_path)
 @server.route('/meme', methods=['GET'])
 def getMeme():
-    
-
-
-expr_name = 'multimodal1024'
-model = MultiModalFeatureExtractor(expr_name, data_root='/home/seungchan/Desktop/Projs/kakao/post/Kakao_ML/backend/datasets/2022_02_all')
-@server.route('/keyword-search', methods = ['GET'])
-def keyword_search():
-    print('keyword search starts!')
-    print(request.get_json())
-    keyword = request.get_json()['keyword']
-    with open(os.path.join('./result', expr_name, 'cluster.pkl'), 'rb') as f:
-        cluster = pickle.load(f)
-    result = model.keyword_search(cluster, categories, keyword)
-    # del model
-    return dict(result=result)
-
+    print('[Flask]: getMeme Starts')
+    msg = request.get_json()['message']
+    return dict(result = Recommander.recommand(msg))
 
 
 # Helper functions

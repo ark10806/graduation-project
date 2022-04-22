@@ -29,16 +29,16 @@ def saveFeatures(data_root: str, pkl_file: str):
     print('complete!')
     print(f'loss rate: {failed / len(dataset) * 100: .2f}%')
 
-def savePkl(data, pkl_file: str):
-    print(f'save {pkl_file}...', end='  ')
-    with open(os.path.join(params.res_path, pkl_file), 'wb') as f:
+def savePkl(data, pkl_path: str):
+    print(f'save {pkl_path}...', end='  ')
+    with open(os.path.join(params.res_path, pkl_path), 'wb') as f:
         pickle.dump(data, f)
     print('complete!')
     
 
-def loadFeatures(pkl_file: str)-> List[torch.Tensor]:
-    print(f'loading {pkl_file}..', end='  ')
-    with open(os.path.join(params.res_path, pkl_file), 'rb') as f:
+def loadFeatures(pkl_path: str)-> List[torch.Tensor]:
+    print(f'loading {pkl_path}..', end='  ')
+    with open(os.path.join(params.res_path, pkl_path), 'rb') as f:
         pkl_data = pickle.load(f)
     print(f'[complete: {len(pkl_data)}]')
     return pkl_data

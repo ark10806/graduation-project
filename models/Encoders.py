@@ -66,10 +66,12 @@ class MultiModalClip:
     def inference(self, feature: torch.Tensor, msg_emb: List[str])-> torch.Tensor:
         img_emb = self.normalize(feature[:,:512]).to(self.device)
         img_sim = img_emb @ msg_emb.T
-        if len(feature) == 1024:
+        # if len(feature) == 1024:
+        if feature.shape[1] == 1024:
+            print('multi')
             txt_emb = self.normalize(feature[:,512:]).to(self.device)
             txt_sim = txt_emb @ msg_emb.T
-            similiarity = img_sim + txt_sim
+            similiarity = (img_sim + txt_sim) / 2
         else:
             similiarity = img_sim
         _, pred = torch.max(similiarity, -1)
