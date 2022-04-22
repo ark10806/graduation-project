@@ -6,18 +6,21 @@ from tqdm import tqdm
 
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-import params
 from models import Encoders
-from utils import dataloader
+from utils import dataloader, params
 
 
 def saveFeatures(data_root: str, pkl_file: str):
     dataset = dataloader.ImageTextPair(data_root)
     output = []
     failed = 0
-    for img, txt in tqdm(dataset, desc='Extr features'):
+    for image, label in tqdm(dataset, desc='Extr features'):
         try:
-            output.append(clip.get_multimodal_feature(img, txt))
+            output.append({
+                'fname':    label['fname'],
+                'text':     label['text'],
+                'feature':  clip.get_multimodal_feature(image, label['text'])
+            })
         except Exception as e:
             failed += 1
     print(f'save {pkl_file}...', end='  ')
@@ -26,12 +29,21 @@ def saveFeatures(data_root: str, pkl_file: str):
     print('complete!')
     print(f'loss rate: {failed / len(dataset) * 100: .2f}%')
 
+def savePkl(data, pkl_file: str):
+    print(f'save {pkl_file}...', end='  ')
+    with open(os.path.join(params.res_path, pkl_file), 'wb') as f:
+        pickle.dump(data, f)
+    print('complete!')
+    
+
 def loadFeatures(pkl_file: str)-> List[torch.Tensor]:
     print(f'loading {pkl_file}..', end='  ')
-    with open(os.path.join('./result', pkl_file)) as f:
-        features = pickle.load(f)
-    print(f'[complete: {len(features)}]')
-    return features
+    with open(os.path.join(params.res_path, pkl_file), 'rb') as f:
+        pkl_data = pickle.load(f)
+    print(f'[complete: {len(pkl_data)}]')
+    return pkl_data
+
+
 
 
 if __name__ == '__main__':

@@ -7,29 +7,39 @@ import os
 import torch
 import pickle
 from typing import *
+from PIL import Image
 from tqdm import tqdm
 
-import params
 from models import Encoders
-from utils import dataloader, pickleIO
+from utils import dataloader, pickleIO, params
 
-categories = {
-    'etc':          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 
-    'politic':      'It is about political issues or politicians in governments',
-    'social':       'It is about social issues, pandemics or vaccine for COVID-19 virus or photos of family',
-    'economy':      'It is about monetary economy, stocks or bitcoins', 
-    'fashion':      'A photo of fashions, clothings, wearings or shoes',
-    'entertain':    'A photo of musicians, entertainers, celebrity, music bands or idols', 
-    'sport':        'A photo of sports or athletes', 
-    'food':         'It is about dishes, foods, eating things', 
-    'animal':       'A photo of pet animals or companion animals',
-    'selfi':        'A photo of self-taken (portrait) photographs',
-    'meme':         'A picture of memes or funny clips',
-    'cartoon':      'A photo or picture of strip cartoons, comics, sketches or drawings', 
-    'movie':        'It is about movies or cinema', 
-    'game':         'A photo that has taken in video games',
-    'landscape':    'A photo of landscape or natural scenery',
-}
-
-def getCategories(self, feature: torch.Tensor, categories: List[str]) -> float:
+def getMeme():
+    clip = Encoders.MultiModalClip()
+    pkl_data = pickleIO.loadFeatures(params.pkl_file)
+    output = []
+    for data in tqdm(pkl_data):
+        pred, prob = clip.getCategory(data['feature'], params.categories)
+        if pred == 0: # Meme category
+            output.append({
+                'fname':    data['fname'],
+                'text':     data['text'],
+                'feature':  data['feature'],
+                'prob':     prob[0]
+            })
     
+    pickleIO.savePkl(output, 'meme.pkl')
+    print(f'len(meme): {len(output)}')
+
+def visMeme():
+    meme = pickleIO.loadFeatures('meme.pkl')
+    for data in tqdm(meme, desc='vis memes'):
+        img = Image.open(os.path.join(params.data_root, 'images', data['fname'])).resize((256,256))
+        meme_path = os.path.join(params.res_path, 'meme')
+        if not os.path.isdir(meme_path):
+            os.makedirs(meme_path)
+        img.save(os.path.join(meme_path, f'{data["prob"]*100:.2f}.jpeg' ))
+
+
+if __name__ == '__main__':
+    # getMeme()
+    visMeme()
