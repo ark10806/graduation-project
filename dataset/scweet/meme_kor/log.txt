@@ -7,3 +7,44 @@
 [22 18:01:57]
 	elapsed: 00h 06m 50s:  [ Complete ] 7 ~ 8
 [22 18:08:48]
+	elapsed: 00h 03m 09s:  [  Failed  ] 8 ~ 9
+		Message: chrome not reachable
+  (Session info: headless chrome=97.0.4692.99)
+Stacktrace:
+#0 0x55aa0b9f49f3 <unknown>
+#1 0x55aa0b4bc66f <unknown>
+#2 0x55aa0b4ab464 <unknown>
+#3 0x55aa0b4abe69 <unknown>
+#4 0x55aa0b4adbb2 <unknown>
+#5 0x55aa0b4a6336 <unknown>
+#6 0x55aa0b4bdbd2 <unknown>
+#7 0x55aa0b522b41 <unknown>
+#8 0x55aa0b510133 <unknown>
+#9 0x55aa0b4e5c2a <unknown>
+#10 0x55aa0b4e6cf5 <unknown>
+#11 0x55aa0ba262fd <unknown>
+#12 0x55aa0ba3c83b <unknown>
+#13 0x55aa0ba28015 <unknown>
+#14 0x55aa0ba3d335 <unknown>
+#15 0x55aa0ba1ba2f <unknown>
+#16 0x55aa0ba57fa8 <unknown>
+#17 0x55aa0ba58128 <unknown>
+#18 0x55aa0ba7302d <unknown>
+#19 0x7f06bc7ac6db <unknown>
+
+[22 18:11:58]
+	elapsed: 00h 06m 48s:  [ Complete ] 8 ~ 9
+[22 18:18:46]
+	elapsed: 00h 06m 36s:  [ Complete ] 9 ~ 10
+[22 18:25:23]
+	elapsed: 00h 06m 27s:  [ Complete ] 10 ~ 11
+[22 18:31:50]
+	elapsed: 00h 06m 19s:  [ Complete ] 11 ~ 12
+[22 18:38:10]
+	elapsed: 00h 06m 51s:  [ Complete ] 1 ~ 2
+[22 18:45:01]
+	elapsed: 00h 05m 59s:  [ Complete ] 2 ~ 3
+[22 18:51:01]
+	elapsed: 00h 07m 12s:  [ Complete ] 3 ~ 4
+[22 18:58:13]
+	elapsed: 00h 06m 43s:  [ Complete ] 4 ~ 5
