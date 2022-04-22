@@ -1,1 +1,9 @@
-[22 17:28:00]
+[22 17:42:19]
+	elapsed: 00h 06m 24s:  [ Complete ] 4 ~ 5
+[22 17:48:43]
+	elapsed: 00h 06m 31s:  [ Complete ] 5 ~ 6
+[22 17:55:15]
+	elapsed: 00h 06m 42s:  [ Complete ] 6 ~ 7
+[22 18:01:57]
+	elapsed: 00h 06m 50s:  [ Complete ] 7 ~ 8
+[22 18:08:48]

@@ -18,8 +18,10 @@ def getMeme():
     pkl_data = pickleIO.loadFeatures(params.pkl_file)
     output = []
     for data in tqdm(pkl_data, desc=f'fltr {params.catname[0]}'):
-        pred, prob = clip.getCategory(data['feature'], params.categories)
+        cat_emb = clip.get_text_feature(params.categories)
+        pred, prob = clip.inference(data['feature'], cat_emb)
         if pred == 0: # Meme category
+            #! url 추가해야함 (raspi)
             output.append({
                 'fname':    data['fname'],
                 'text':     data['text'],

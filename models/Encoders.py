@@ -63,18 +63,18 @@ class MultiModalClip:
             return txt_emb
     
     @torch.no_grad()
-    def getCategory(self, feature: torch.Tensor, categories: List[str])-> torch.Tensor:
-        cat_emb = self.get_text_feature(categories)
+    def inference(self, feature: torch.Tensor, msg_emb: List[str])-> torch.Tensor:
         img_emb = self.normalize(feature[:,:512]).to(self.device)
-        img_sim = img_emb @ cat_emb.T
+        img_sim = img_emb @ msg_emb.T
         if len(feature) == 1024:
             txt_emb = self.normalize(feature[:,512:]).to(self.device)
-            txt_sim = txt_emb @ cat_emb.T
+            txt_sim = txt_emb @ msg_emb.T
             similiarity = img_sim + txt_sim
         else:
             similiarity = img_sim
         _, pred = torch.max(similiarity, -1)
         return pred.to('cpu'), list(map(float, similiarity.to('cpu')[0]))
+    
 
 if __name__ == '__main__':
     # strs = 'TC Sparkler Update Bracket play, Day 1 Shoutout to our two studs in the circle, @JaydenHeavener & @myaholt25 for throwing a combined no-hitter in our 9-0 win vs TN Mojo Mobley Bracket game #2 tomorrow @ 12p vs TN Mojo Hughes #boltsboom #boltsPremier2024 #L1nked'

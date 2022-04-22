@@ -17,7 +17,7 @@ def get_twits(year: int, month: int, logger: Logger, dst: str, keyword: str):
             # since="2021-04-01",
             # until="2022-04-22",
             from_account = None,
-            interval=3,
+            interval=1,
             headless=True, 
             display_type="Top",
             lang='ko', 
