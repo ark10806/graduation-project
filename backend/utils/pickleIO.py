@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from models import Encoders
 from utils import dataloader, params
 
-
+raspi_prefix = 'http://ark10806.iptime.org/Projs/graduation-project/16-22_animalMeme/images/'
 def saveMultimodalFeature(data_root: str, feature_fname: str):
     clip = Encoders.MultiModalClip()
     dataset = dataloader.ImageTextPair(data_root)
@@ -20,7 +20,8 @@ def saveMultimodalFeature(data_root: str, feature_fname: str):
             output.append({
                 'fname':    label['fname'],
                 'text':     label['text'],
-                'feature':  clip.get_multimodal_feature(image, label['text'])
+                'feature':  clip.get_multimodal_feature(image, label['text']),
+                'image_url': raspi_prefix + label['fname']
             })
         except Exception as e:
             failed += 1

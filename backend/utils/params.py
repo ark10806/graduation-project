@@ -4,17 +4,24 @@ def mkdir(path: str):
     if not os.path.isdir(path): os.makedirs(path)
 
 topk = 10
-root_dir = '/home/seungchan/Desktop/Projs/graduation-project'
+root_dir = '/home/seungchan/Desktop/Projs/graduation-project/backend'
 # data_root = os.path.join(root_dir, 'dataset/2022_02_all')
 data_root = os.path.join(root_dir, 'dataset/16-22_animalMeme')
 feature_fname = 'feature_16-22_en.pkl'
 cluster_fname = 'cluster16-22.pkl'
-meme_feature_path = os.path.join(root_dir, 'result', 'meme.pkl')
+# meme_feature_path = os.path.join(root_dir, 'result', 'meme.pkl')
 res_path = os.path.join(root_dir, 'result')
 scweet_path = os.path.join(root_dir, 'dataset/scweet')
-papago_monitor_path = os.path.join(root_dir, 'utils/translator/papago_monitor')
+papago_monitor_path = os.path.join(root_dir, 'utils/papago_monitor')
 mkdir(res_path)
 mkdir(papago_monitor_path)
+
+papago_accounts = {
+    'sck12031203':
+        {'clnt_id': 'UE99SV2HXMjrngEH7CR7',
+        'clnt_pw': 'N5z1Gya64P'}
+}
+papago_user = 'sck12031203'
 
 categories = [
     # 'A funny clips, animals, comics or strip cartoons',
