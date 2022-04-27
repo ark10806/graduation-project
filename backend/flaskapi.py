@@ -40,7 +40,7 @@ def np_image_to_base64(im_matrix):
     im_url = "data:image/jpeg;base64, " + encoded_image
     return im_url
 
-galaxy = vis_hover_img_test(cluster_fname=params.cluster_fname, vis_ratio=0.01)
+galaxy = vis_hover_img_test(cluster_fname=params.cluster_fname, vis_ratio=0.2)
 print('Clustering: start')
 # tsne = TSNE(n_components=3, random_state=3, n_iter=2500, learning_rate='auto', n_jobs=4).fit_transform(galaxy['feature'])
 tsne = TSNE(n_components=3, random_state=3, n_iter=4000, learning_rate='auto', n_jobs=4).fit_transform(galaxy['feature'])
