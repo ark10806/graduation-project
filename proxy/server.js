@@ -18,6 +18,26 @@ app.use(
 	}),
 );
 
+app.post('/',  function(req, res){
+	console.log('est');
+	var dic = {
+		'result': 'hello'
+	}
+	res.write(JSON.stringify(dic))
+	res.end()
+})
+
+app.get('/hello', async function(req, res){
+	try{
+        result = await getMeme('cat')
+        let json = JSON.stringify(result)
+        res.write(json)
+        res.end()
+    } catch (error){
+        console.log(`[Error]: GET meme with ${error}`)
+    }
+})
+
 app.get('/meme', async function(req, res){
     try{
         const msg = req.query.message
