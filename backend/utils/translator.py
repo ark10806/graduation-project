@@ -7,12 +7,13 @@ from datetime import datetime
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from utils import params
+from utils import papagoaccounts
 
 
 class PapagoTranslator:
     def __init__(self, account_id: str):
-        self.clnt_id = params.papago_accounts[account_id]['clnt_id']
-        self.clnt_pw = params.papago_accounts[account_id]['clnt_pw']
+        self.clnt_id = papagoaccounts.papago_accounts[account_id]['clnt_id']
+        self.clnt_pw = papagoaccounts.papago_accounts[account_id]['clnt_pw']
         self.url = "https://openapi.naver.com/v1/papago/n2mt"
         self.prefix = "source=ko&target=en&text="
         self.monitor = Monitor(account_id)
@@ -79,7 +80,7 @@ class Monitor:
 
 if __name__ == '__main__':
     account_id = 'sck12031203'
-    # translator = PapagoTranslator(user_id)
-    # print(translator.run('띵작'))
+    translator = PapagoTranslator(account_id)
+    print(translator.run('띵작'))
     monitor = Monitor(account_id)
     print(monitor.cnt)

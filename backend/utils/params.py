@@ -6,9 +6,11 @@ def mkdir(path: str):
 topk = 10
 root_dir = '/home/seungchan/Desktop/Projs/graduation-project/backend'
 # data_root = os.path.join(root_dir, 'dataset/2022_02_all')
-data_root = os.path.join(root_dir, 'dataset/16-22_animalMeme')
-feature_fname = 'feature_16-22_en.pkl'
-cluster_fname = 'cluster16-22.pkl'
+data_root = os.path.join(root_dir, 'dataset/en_ko')
+# feature_fname = 'feature_16-22_en.pkl'
+# cluster_fname = 'cluster16-22.pkl'
+feature_fname = 'feature_en_ko.pkl'
+cluster_fname = 'cluster_en_ko.pkl'
 # meme_feature_path = os.path.join(root_dir, 'result', 'meme.pkl')
 res_path = os.path.join(root_dir, 'result')
 scweet_path = os.path.join(root_dir, 'dataset/scweet')
@@ -16,19 +18,14 @@ papago_monitor_path = os.path.join(root_dir, 'utils/papago_monitor')
 mkdir(res_path)
 mkdir(papago_monitor_path)
 
-papago_accounts = {
-    'sck12031203':
-        {'clnt_id': 'UE99SV2HXMjrngEH7CR7',
-        'clnt_pw': 'N5z1Gya64P'}
-}
+
 papago_user = 'sck12031203'
 
 categories = [
     # 'A funny clips, animals, comics or strip cartoons',
     "I want to go home",
     # 'It is about dishes, foods, eating things', 
-    "sexy",
-    # 'It is about political issues or politicians in governments',
+    'It is about political issues or politicians in governments',
     # 'It is about social issues, pandemics or vaccine for COVID-19 virus or photos of family',
     # 'It is about monetary economy, stocks or bitcoins',
     # 'A photo of fashions, clothings, wearings or shoes',

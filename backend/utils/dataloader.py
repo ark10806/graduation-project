@@ -19,3 +19,20 @@ class ImageTextPair:
         image = Image.open(os.path.join(self.data_root, 'images', self.label[idx]['fname']))
         label = self.label[idx]
         return image, label
+
+
+class ImageSinglePair:
+    def __init__(self, data_root: str):
+        df = pd.read_csv()
+        self.data_root = data_root
+        _fname = df['filename'].to_list()
+        self.label = [{'fname': fname} for fname in _fname]
+        del df, _fname
+    
+    def __len__(self):
+        return len(self.label)
+    
+    def __getitem__(self, idx: int) -> Tuple:
+        image = Image.open(os.path.join(self.data_root, 'images', self.label[idx]['fname']))
+        label = self.label[idx]
+        return image, label
