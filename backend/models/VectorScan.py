@@ -86,7 +86,6 @@ class VecScan:
                         if curr_sim > nearest['sim']:
                             nearest['sim'], nearest['cluster'] = curr_sim, child
                 sim, child = nearest['sim'], nearest['cluster']
-                # print(len(self.universe))
                 if  sim >= self.eta and (len(parent.elmts) + len(child.elmts) < len(self.universe) / 20) :
                     parent.merge(child)
                     self.universe.remove(child)

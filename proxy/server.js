@@ -1,12 +1,21 @@
 var express = require('express')
 var bodyParser = require('body-parser')
-var http = require('http')
+var http = require('https')
+var socketIO = require('socket.io')
 var app = express()
+const fs = require('fs')
 const getMeme = require('./service')
 
 const cors = require('cors')
 const PORT = 5000
-var httpServer = http.createServer(app)
+const options = {
+	key: fs.readFileSync('./keys/private.key', 'utf8'),
+	cert: fs.readFileSync('./keys/certificate.crt', 'utf8'),
+	ca: fs.readFileSync('./keys/ca_bundle.crt', 'utf8')
+}
+
+
+var httpServer = http.createServer(options, app)
 
 const file_limit = "300mb"
 app.use(bodyParser.json({ limit: file_limit }));
@@ -18,7 +27,7 @@ app.use(
 	}),
 );
 
-app.post('/',  function(req, res){
+app.get('/',  function(req, res){
 	console.log('est');
 	var dic = {
 		'result': 'hello'
